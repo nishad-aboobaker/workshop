@@ -1,0 +1,147 @@
+/* ==== Rana Motors Design System ==== */
+:root {
+  --primary-color: #e63946; /* Vibrant Red/Orange for motors */
+  --primary-hover: #d62828;
+  --secondary-color: #1d3557; /* Deep Slate/Navy */
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-dark: #2b2d42;
+  --text-muted: #8d99ae;
+  --border-color: #edf2f4;
+  --shadow-sm: 0 2px 4px rgba(29, 53, 87, 0.05);
+  --shadow-md: 0 4px 12px rgba(29, 53, 87, 0.1);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+/* Hide scrollbars globally */
+::-webkit-scrollbar { display: none; }
+* { -ms-overflow-style: none; scrollbar-width: none; }
+
+body { background: var(--bg-color); color: var(--text-dark); line-height: 1.6; }
+
+/* Global Header */
+.app-header {
+  background: var(--secondary-color);
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 30px;
+}
+.app-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.app-header h1 span {
+  color: var(--primary-color);
+}
+
+.container { max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+h2, h3 { color: var(--secondary-color); margin-bottom: 16px; font-weight: 600; }
+
+/* Buttons */
+button { 
+  background: var(--primary-color); 
+  color: white; 
+  border: none; 
+  padding: 12px 20px; 
+  border-radius: var(--radius-md); 
+  cursor: pointer; 
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+button:hover { background: var(--primary-hover); transform: translateY(-1px); }
+button.secondary { background: var(--secondary-color); }
+button.secondary:hover { background: #0b1a2e; }
+button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Forms */
+input, textarea, select { 
+  width: 100%; 
+  padding: 12px 16px; 
+  margin-bottom: 16px; 
+  border: 1px solid var(--border-color); 
+  border-radius: var(--radius-md); 
+  font-size: 15px; 
+  transition: border-color 0.2s;
+  background: var(--card-bg);
+}
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); }
+textarea { height: 100px; resize: vertical; }
+.form-group { margin-bottom: 8px; }
+label { font-size: 14px; font-weight: 500; color: var(--secondary-color); margin-bottom: 6px; display: block; }
+
+/* Cards & Layout */
+.job-card { 
+  background: var(--card-bg); 
+  border-radius: var(--radius-lg); 
+  padding: 20px; 
+  margin-bottom: 16px; 
+  cursor: pointer; 
+  border: 1px solid var(--border-color); 
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.job-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: #d1d9e6; }
+.job-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.name { font-weight: 600; font-size: 18px; color: var(--secondary-color); }
+.status { color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.job-meta { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; display: flex; gap: 12px; align-items: center; }
+.job-issue { font-size: 15px; color: var(--text-dark); background: var(--bg-color); padding: 12px; border-radius: var(--radius-md); }
+
+.info-card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+.info-card p { margin-bottom: 12px; display: flex; flex-direction: column; }
+.info-card p strong { color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Dashboard Overview */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.dashboard-card {
+  background: var(--card-bg);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.dashboard-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.dashboard-card h3 {
+  margin: 6px 0 0 0;
+  color: var(--secondary-color);
+  font-size: 18px;
+}
+
+/* Timeline/Steps */
+.steps { background: var(--card-bg); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+.step { border-left: 3px solid var(--primary-color); padding: 0 0 16px 20px; position: relative; }
+.step::before { content: ''; position: absolute; left: -7px; top: 0; width: 11px; height: 11px; background: var(--primary-color); border-radius: 50%; }
+.step:last-child { border-left-color: transparent; padding-bottom: 0; }
+.step-label { font-weight: 600; display: block; color: var(--secondary-color); font-size: 16px; margin-bottom: 4px; }
+.step-note { font-size: 14px; color: var(--text-dark); display: block; margin-bottom: 4px; }
+.step-time { font-size: 12px; color: var(--text-muted); }
+
+.update-form { background: var(--card-bg); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+.update-form button { width: 100%; margin-top: 8px; }
+
+.empty { text-align: center; color: var(--text-muted); margin-top: 60px; font-size: 16px; }

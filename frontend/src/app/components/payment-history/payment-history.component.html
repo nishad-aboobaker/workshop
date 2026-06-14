@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="header">
+    <button class="secondary" routerLink="/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back
+    </button>
+    <h2>Payment History</h2>
+  </div>
+
+  <div *ngIf="dailyRevenues.length === 0" class="empty">
+    No payment history found yet.
+  </div>
+
+  <div class="job-card" *ngFor="let day of dailyRevenues" style="cursor: default;">
+    <div class="job-top" style="margin-bottom: 16px;">
+      <span class="name" style="font-size: 20px;">{{ day.dateStr }}</span>
+      <span class="status" style="background: #27ae60; font-size: 14px;">Rs. {{ day.total }}</span>
+    </div>
+    
+    <div style="display: flex; gap: 20px; background: #f8f9fa; padding: 16px; border-radius: 8px;">
+      <div style="flex: 1;">
+        <span style="display: block; font-size: 12px; color: #8d99ae; font-weight: 600; text-transform: uppercase;">Cash Collected</span>
+        <span style="display: block; font-size: 18px; color: #1d3557; font-weight: 700;">Rs. {{ day.cash }}</span>
+      </div>
+      <div style="flex: 1;">
+        <span style="display: block; font-size: 12px; color: #8d99ae; font-weight: 600; text-transform: uppercase;">GPay / UPI Collected</span>
+        <span style="display: block; font-size: 18px; color: #1d3557; font-weight: 700;">Rs. {{ day.gpay }}</span>
+      </div>
+    </div>
+  </div>
+</div>

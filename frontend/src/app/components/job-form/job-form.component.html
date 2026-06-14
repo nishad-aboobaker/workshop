@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="header">
+    <h2>Create New Job Card</h2>
+  </div>
+  
+  <div class="info-card">
+    <div class="form-group">
+      <label>Customer Name</label>
+      <input [(ngModel)]="job.customerName" placeholder="Enter customer name" />
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input [(ngModel)]="job.customerPhone" placeholder="10-digit mobile number" />
+    </div>
+    <div class="form-group">
+      <label>Bike Model</label>
+      <input [(ngModel)]="job.bikeModel" placeholder="E.g., Honda Activa 6G" />
+    </div>
+    <div class="form-group">
+      <label>Vehicle Number</label>
+      <input [(ngModel)]="job.vehicleNumber" placeholder="E.g., KL 01 AB 1234" />
+    </div>
+    <div class="form-group">
+      <label>Issue Description</label>
+      <textarea [(ngModel)]="job.issueDescription" placeholder="Describe the issues reported by the customer"></textarea>
+    </div>
+    
+    <div style="display: flex; gap: 12px; margin-top: 24px;">
+      <button (click)="submit()" [disabled]="loading">
+        <svg *ngIf="!loading" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        {{ loading ? "Creating Job..." : "Create Job Card" }}
+      </button>
+      <button class="secondary" routerLink="/">Cancel</button>
+    </div>
+  </div>
+</div>
