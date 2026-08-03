@@ -11,6 +11,7 @@ import { initDatabase } from './src/database/database';
 import DashboardScreen from './src/screens/DashboardScreen';
 import NewJobScreen from './src/screens/NewJobScreen';
 import JobDetailScreen from './src/screens/JobDetailScreen';
+import SplashScreen from './src/screens/SplashScreen';
 import PaymentHistoryScreen from './src/screens/PaymentHistoryScreen';
 import ExpenseScreen from './src/screens/ExpenseScreen';
 import ProfitScreen from './src/screens/ProfitScreen';
@@ -91,6 +92,11 @@ function MainApp() {
         }}
       >
         <Stack.Screen 
+          name="Splash" 
+          component={SplashScreen} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
           name="MainTabs" 
           component={MainTabs} 
           options={{ headerShown: false }}
@@ -112,10 +118,18 @@ function MainApp() {
 
 export default function App() {
   const [ready, setReady] = useState(false);
+  const [initialTheme, setInitialTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
     initDatabase()
-      .then(() => setReady(true))
+      .then(async () => {
+        const { getSetting } = require('./src/database/database');
+        const savedTheme = await getSetting('theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          setInitialTheme(savedTheme);
+        }
+        setReady(true);
+      })
       .catch((err) => console.error('Database init failed:', err));
   }, []);
 
@@ -128,7 +142,7 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={initialTheme}>
       <MainApp />
     </ThemeProvider>
   );

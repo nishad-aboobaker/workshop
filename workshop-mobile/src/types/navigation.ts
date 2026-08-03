@@ -10,9 +10,10 @@ export type MainTabParamList = {
 };
 
 export type RootStackParamList = {
+  Splash: undefined;
   MainTabs: undefined;
   NewJob: undefined;
-  JobDetail: { jobId: number };
+  JobDetail: { jobId: string };
 };
 
 export type DashboardScreenProps = CompositeScreenProps<

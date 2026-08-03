@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { setSetting } from '../database/database';
 
 export type ThemeType = 'light' | 'dark';
 
@@ -57,11 +58,15 @@ export const useTheme = () => useContext(ThemeContext);
 
 const THEME_STORAGE_KEY = '@app_theme_pref';
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeType>('dark');
+export const ThemeProvider = ({ children, initialTheme = 'dark' }: { children: ReactNode, initialTheme?: 'dark' | 'light' }) => {
+  const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme((prev) => {
+      const newTheme = prev === 'dark' ? 'light' : 'dark';
+      setSetting('theme', newTheme).catch(console.error);
+      return newTheme;
+    });
   };
 
   const Colors = theme === 'light' ? lightTheme : darkTheme;

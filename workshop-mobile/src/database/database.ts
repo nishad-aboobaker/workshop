@@ -57,6 +57,11 @@ export async function initDatabase(): Promise<void> {
       amount REAL NOT NULL,
       created_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
     );
+
+    CREATE TABLE IF NOT EXISTS settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
   `);
 }
 
@@ -293,4 +298,21 @@ export async function getAllExpenses(): Promise<Expense[]> {
 export async function deleteExpenseById(id: number): Promise<void> {
   const database = getDb();
   await database.runAsync(`DELETE FROM expenses WHERE id = ?`, [id]);
+}
+
+export async function getSetting(key: string): Promise<string | null> {
+  const database = getDb();
+  const row = await database.getFirstAsync<{value: string}>(
+    `SELECT value FROM settings WHERE key = ?`,
+    [key]
+  );
+  return row ? row.value : null;
+}
+
+export async function setSetting(key: string, value: string): Promise<void> {
+  const database = getDb();
+  await database.runAsync(
+    `INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?`,
+    [key, value, value]
+  );
 }
